@@ -1,1 +1,20 @@
-<p>category-list-group works!</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col" class="text-center">Edit</th>
+      <th scope="col" class="text-center">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categoryList">
+      <td>{{category.id}}</td>
+      <td>{{category.name}}</td>
+      <td>{{category.description}}</td>
+      <td class="text-center"><i class="bi bi-pencil pointer"></i></td>
+      <td class="text-center"><i class="bi bi-trash pointer" (click)="deleteCategory(category.id)"></i></td>
+    </tr>
+  </tbody>
+</table>
