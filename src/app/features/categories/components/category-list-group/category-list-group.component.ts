@@ -3,11 +3,12 @@ import { CategoriesService } from '../../services/categories.service';
 import { CategoryListItem } from '../../models/category-list-item';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-category-list-group',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './category-list-group.component.html',
   styleUrl: './category-list-group.component.css',
 })

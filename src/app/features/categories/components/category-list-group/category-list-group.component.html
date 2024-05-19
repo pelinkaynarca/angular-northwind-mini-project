@@ -13,7 +13,7 @@
       <td>{{category.id}}</td>
       <td>{{category.name}}</td>
       <td>{{category.description}}</td>
-      <td class="text-center"><i class="bi bi-pencil pointer"></i></td>
+      <td class="text-center"><i class="bi bi-pencil pointer" [routerLink]="['update',category.id]"></i></td>
       <td class="text-center"><i class="bi bi-trash pointer" (click)="deleteCategory(category.id)"></i></td>
     </tr>
   </tbody>

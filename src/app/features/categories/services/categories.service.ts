@@ -26,6 +26,9 @@ export class CategoriesService {
   }
 
   update(category: UpdateCategory): Observable<UpdateCategory> {
-    return this.http.put<UpdateCategory>(this.apiControllerUrl, category);
+    return this.http.put<UpdateCategory>(
+      this.apiControllerUrl + '/' + category.id,
+      category
+    );
   }
 }
