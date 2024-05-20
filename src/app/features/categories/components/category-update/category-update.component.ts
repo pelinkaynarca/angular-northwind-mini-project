@@ -18,18 +18,18 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './category-update.component.html',
-  styleUrl: './category-update.component.css',
+  styleUrls: ['./category-update.component.css'],
 })
 export class CategoryUpdateComponent implements OnInit {
-  category?: CategoryListItem;
+  category!: CategoryListItem;
   updateForm: FormGroup;
-  categoryId:number=this.route.snapshot.params['id'];
+  categoryId: number = this.route.snapshot.params['id'];
 
   constructor(
     private categoriesService: CategoriesService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router:Router
+    private router: Router
   ) {
     this.updateForm = this.fb.group({
       name: new FormControl(null, [
@@ -51,17 +51,21 @@ export class CategoryUpdateComponent implements OnInit {
     const params = this.route.snapshot.params;
     this.categoriesService.getById(params['id']).subscribe((category) => {
       this.category = category;
+      this.updateForm.patchValue({
+        name: category.name,
+        description: category.description
+      });
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     if (!this.updateForm.valid)
       return;
-    const formData=this.updateForm.value;
-    const category:UpdateCategory={
-      id:this.categoryId,
-      name:formData.name,
-      description:formData.description
+    const formData = this.updateForm.value;
+    const category: UpdateCategory = {
+      id: this.categoryId,
+      name: formData.name,
+      description: formData.description
     };
 
     this.categoriesService.update(category).subscribe({
@@ -72,8 +76,8 @@ export class CategoryUpdateComponent implements OnInit {
           text: 'Category updated successfully!',
           showConfirmButton: false,
           timer: 1500,
-        }).then(()=>{
-          this.router.navigate(['/admin','categories']);
+        }).then(() => {
+          this.router.navigate(['/admin', 'categories']);
         });
       },
     });

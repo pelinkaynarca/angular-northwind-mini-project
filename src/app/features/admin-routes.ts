@@ -3,6 +3,8 @@ import { AdminLayoutComponent } from './components/admin-layout/admin-layout.com
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { CategoryUpdateComponent } from './categories/components/category-update/category-update.component';
 import { CategoryListGroupComponent } from './categories/components/category-list-group/category-list-group.component';
+import { ProductUpdateComponent } from './products/components/product-update/product-update.component';
+import { ProductListGroupComponent } from './products/components/product-list-group/product-list-group.component';
 
 export const adminRoutes: Routes = [
   {
@@ -25,6 +27,19 @@ export const adminRoutes: Routes = [
           {
             path:'',
             component:CategoryListGroupComponent
+          }
+        ],
+      },
+      {
+        path: 'products',
+        children: [
+          {
+            path: 'update/:id',
+            component: ProductUpdateComponent,
+          },
+          {
+            path:'',
+            component:ProductListGroupComponent
           }
         ],
       },
