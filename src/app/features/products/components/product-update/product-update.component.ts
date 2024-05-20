@@ -57,9 +57,7 @@ export class ProductUpdateComponent implements OnInit {
         Validators.required,
         Validators.min(0),
       ]),
-      imageUrl: new FormControl(null, [
-        Validators.required,
-      ]),
+      imageUrl: new FormControl(null),
     });
   }
 
@@ -67,7 +65,7 @@ export class ProductUpdateComponent implements OnInit {
     this.getProductById();
     this.getCategoryList();
   }
-  
+
   getCategoryList() {
     this.categoriesService.getAll().subscribe((categoryList)=>{
       this.categoryList=categoryList;
@@ -92,29 +90,29 @@ export class ProductUpdateComponent implements OnInit {
   onSubmit() {
     if (!this.updateForm.valid)
       return;
-    const formData = this.updateForm.value;
-    const product: UpdateProduct = {
-      id: this.productId,
-      name: formData.name,
-      categoryId: formData.categoryId,
-      unitPrice: formData.unitPrice,
-      unitsInStock: formData.unitsInStock,
-      imageUrl: formData.imageUrl,
+      const formData = this.updateForm.value;
+      const product: UpdateProduct = {
+        id: this.productId,
+        name: formData.name,
+        categoryId: formData.categoryId,
+        unitPrice: formData.unitPrice,
+        unitsInStock: formData.unitsInStock,
+        imageUrl: formData.imageUrl,
       description: formData.description
-    };
+      };
 
-    this.productsService.update(product).subscribe({
-      next: () => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Successful',
-          text: 'Product updated successfully!',
-          showConfirmButton: false,
-          timer: 1500,
-        }).then(() => {
-          this.router.navigate(['/admin', 'products']);
-        });
-      },
-    });
+      this.productsService.update(product).subscribe({
+        next: () => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Successful',
+            text: 'Product updated successfully!',
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            this.router.navigate(['/admin', 'products']);
+          });
+        },
+      });
   }
 }
