@@ -1,12 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProductsService } from '../../services/products.service';
+import { ProductListItem } from '../../models/product-list-item';
+import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-list-group',
   standalone: true,
-  imports: [],
+  imports: [CommonModule,RouterLink],
   templateUrl: './product-list-group.component.html',
-  styleUrl: './product-list-group.component.css'
+  styleUrl: './product-list-group.component.css',
 })
-export class ProductListGroupComponent {
+export class ProductListGroupComponent implements OnInit {
 
+  productList: ProductListItem[] = [];
+
+  constructor(private productsService: ProductsService) {}
+
+  ngOnInit(): void {
+    this.getProductList();
+  }
+
+  getProductList() {
+    this.productsService.getAll().subscribe((productList)=>{
+      this.productList=productList;
+    })
+  }
+
+  deleteProduct(id:number){
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productsService.delete(id).subscribe(()=>{
+          this.getProductList();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        });
+      }
+    });
+  }
 }
