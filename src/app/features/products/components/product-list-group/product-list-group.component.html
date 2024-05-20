@@ -12,7 +12,7 @@
       <tr *ngFor="let product of productList">
         <td>{{product.id}}</td>
         <td>{{product.name}}</td>
-        <td>{{product.imageUrl}}</td>
+        <td>{{product.description}}</td>
         <td class="text-center"><i class="bi bi-pencil pointer" [routerLink]="['update',product.id]"></i></td>
         <td class="text-center"><i class="bi bi-trash pointer" (click)="deleteProduct(product.id)"></i></td>
       </tr>
