@@ -12,11 +12,18 @@ import {
 } from '@angular/forms';
 import { UpdateCategory } from '../../models/update-category';
 import Swal from 'sweetalert2';
+import { FormControlErrorMessagePipe } from '../../../../shared/pipes/form-control-error-message.pipe';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-category-update',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    FormControlErrorMessagePipe,
+  ],
   templateUrl: './category-update.component.html',
   styleUrls: ['./category-update.component.css'],
 })
@@ -53,19 +60,18 @@ export class CategoryUpdateComponent implements OnInit {
       this.category = category;
       this.updateForm.patchValue({
         name: category.name,
-        description: category.description
+        description: category.description,
       });
     });
   }
 
   onSubmit() {
-    if (!this.updateForm.valid)
-      return;
+    if (!this.updateForm.valid) return;
     const formData = this.updateForm.value;
     const category: UpdateCategory = {
       id: this.categoryId,
       name: formData.name,
-      description: formData.description
+      description: formData.description,
     };
 
     this.categoriesService.update(category).subscribe({

@@ -15,13 +15,14 @@ import Swal from 'sweetalert2';
 import { CategoriesService } from '../../../categories/services/categories.service';
 import { CategoryListItem } from '../../../categories/models/category-list-item';
 import { CommonModule } from '@angular/common';
+import { FormControlErrorMessagePipe } from '../../../../shared/pipes/form-control-error-message.pipe';
 
 @Component({
-  selector: 'app-product-update',
-  standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
-  templateUrl: './product-update.component.html',
-  styleUrls: ['./product-update.component.css'],
+    selector: 'app-product-update',
+    standalone: true,
+    templateUrl: './product-update.component.html',
+    styleUrls: ['./product-update.component.css'],
+    imports: [FormsModule, ReactiveFormsModule, CommonModule, FormControlErrorMessagePipe]
 })
 export class ProductUpdateComponent implements OnInit {
   product!: ProductListItem;
