@@ -5,13 +5,14 @@ import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from "../../../../shared/pipes/translate.pipe";
+import { ButtonDirective } from '../../../../shared/directives/button.directive';
 
 @Component({
     selector: 'app-category-list-group',
     standalone: true,
     templateUrl: './category-list-group.component.html',
     styleUrl: './category-list-group.component.css',
-    imports: [CommonModule, RouterLink, TranslatePipe]
+    imports: [CommonModule, RouterLink, TranslatePipe, ButtonDirective]
 })
 export class CategoryListGroupComponent implements OnInit {
 

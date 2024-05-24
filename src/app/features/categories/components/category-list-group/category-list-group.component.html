@@ -13,8 +13,12 @@
       <td>{{category.id}}</td>
       <td>{{category.name | translate}}</td>
       <td>{{category.description}}</td>
-      <td class="text-center"><i class="bi bi-pencil pointer" [routerLink]="['update',category.id]"></i></td>
-      <td class="text-center"><i class="bi bi-trash pointer" (click)="deleteCategory(category.id)"></i></td>
+      <td class="text-center">
+        <button type="button" appButton class="btn"><i class="bi bi-pencil pointer" [routerLink]="['update',category.id]"></i></button>
+      </td>
+      <td class="text-center">
+        <button type="button" appButton class="btn"><i class="bi bi-trash pointer" (click)="deleteCategory(category.id)"></i></button>
+      </td>
     </tr>
   </tbody>
 </table>
