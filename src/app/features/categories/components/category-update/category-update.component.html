@@ -1,7 +1,7 @@
 <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label fw-bold">Name</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name">
+    <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name" appNoCharacterInput>
     <small class="text-danger" *ngIf="updateForm.controls['name'].touched">
       {{ updateForm.controls['name'].errors | formControlErrorMessage }}
     </small>

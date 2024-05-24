@@ -14,6 +14,7 @@ import { UpdateCategory } from '../../models/update-category';
 import Swal from 'sweetalert2';
 import { FormControlErrorMessagePipe } from '../../../../shared/pipes/form-control-error-message.pipe';
 import { CommonModule } from '@angular/common';
+import { NoCharacterInputDirective } from '../../../../shared/directives/no-character-input.directive';
 
 @Component({
   selector: 'app-category-update',
@@ -23,6 +24,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     CommonModule,
     FormControlErrorMessagePipe,
+    NoCharacterInputDirective
   ],
   templateUrl: './category-update.component.html',
   styleUrls: ['./category-update.component.css'],
