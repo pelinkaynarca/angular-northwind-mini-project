@@ -11,7 +11,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { UpdateProduct } from '../../models/update-product';
-import Swal from 'sweetalert2';
 import { CategoriesService } from '../../../categories/services/categories.service';
 import { CategoryListItem } from '../../../categories/models/category-list-item';
 import { CommonModule } from '@angular/common';
@@ -101,19 +100,13 @@ export class ProductUpdateComponent implements OnInit {
         imageUrl: formData.imageUrl,
       description: formData.description
       };
-
       this.productsService.update(product).subscribe({
         next: () => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Successful',
-            text: 'Product updated successfully!',
-            showConfirmButton: false,
-            timer: 1500,
-          }).then(() => {
             this.router.navigate(['/admin', 'products']);
-          });
         },
       });
+  }
+  isFormDirty(): boolean {
+    return this.updateForm.dirty;
   }
 }

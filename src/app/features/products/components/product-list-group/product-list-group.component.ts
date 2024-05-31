@@ -4,6 +4,7 @@ import { ProductListItem } from '../../models/product-list-item';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { RouterLink } from '@angular/router';
+import { LoadingService } from '../../../../shared/loading/services/loading.service';
 
 @Component({
   selector: 'app-product-list-group',
@@ -16,15 +17,19 @@ export class ProductListGroupComponent implements OnInit {
 
   productList: ProductListItem[] = [];
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService, private loadingService: LoadingService) {}
 
   ngOnInit(): void {
     this.getProductList();
   }
 
   getProductList() {
+    this.loadingService.show();
     this.productsService.getAll().subscribe((productList)=>{
+      setTimeout(() => { 
       this.productList=productList;
+      this.loadingService.hide(); 
+    }, 1000);
     })
   }
 

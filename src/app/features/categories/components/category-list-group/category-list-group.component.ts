@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from "../../../../shared/pipes/translate.pipe";
 import { ButtonDirective } from '../../../../shared/directives/button.directive';
+import { LoadingService } from '../../../../shared/loading/services/loading.service';
 
 @Component({
     selector: 'app-category-list-group',
@@ -18,15 +19,19 @@ export class CategoryListGroupComponent implements OnInit {
 
   categoryList: CategoryListItem[] = [];
 
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(private categoriesService: CategoriesService,  private loadingService: LoadingService) {}
 
   ngOnInit(): void {
     this.getCategoryList();
   }
 
   getCategoryList() {
+    this.loadingService.show();
     this.categoriesService.getAll().subscribe((categoryList)=>{
-      this.categoryList=categoryList;
+      setTimeout(() => { 
+        this.categoryList = categoryList;
+        this.loadingService.hide(); 
+      }, 1000);
     })
   }
 

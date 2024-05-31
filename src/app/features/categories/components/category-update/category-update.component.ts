@@ -11,10 +11,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { UpdateCategory } from '../../models/update-category';
-import Swal from 'sweetalert2';
 import { FormControlErrorMessagePipe } from '../../../../shared/pipes/form-control-error-message.pipe';
 import { CommonModule } from '@angular/common';
 import { NoCharacterInputDirective } from '../../../../shared/directives/no-character-input.directive';
+import { LoadingComponent } from '../../../../shared/loading/loading.component';
 
 @Component({
   selector: 'app-category-update',
@@ -24,13 +24,15 @@ import { NoCharacterInputDirective } from '../../../../shared/directives/no-char
     ReactiveFormsModule,
     CommonModule,
     FormControlErrorMessagePipe,
-    NoCharacterInputDirective
+    NoCharacterInputDirective,
+    LoadingComponent
   ],
   templateUrl: './category-update.component.html',
   styleUrls: ['./category-update.component.css'],
 })
 export class CategoryUpdateComponent implements OnInit {
   category!: CategoryListItem;
+  loading: boolean = false;
   updateForm: FormGroup;
   categoryId: number = this.route.snapshot.params['id'];
 
@@ -38,7 +40,7 @@ export class CategoryUpdateComponent implements OnInit {
     private categoriesService: CategoriesService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
   ) {
     this.updateForm = this.fb.group({
       name: new FormControl(null, [
@@ -75,19 +77,13 @@ export class CategoryUpdateComponent implements OnInit {
       name: formData.name,
       description: formData.description,
     };
-
     this.categoriesService.update(category).subscribe({
       next: () => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Successful',
-          text: 'Category updated successfully!',
-          showConfirmButton: false,
-          timer: 1500,
-        }).then(() => {
           this.router.navigate(['/admin', 'categories']);
-        });
       },
     });
+}
+  isFormDirty(): boolean {
+    return this.updateForm.dirty;
   }
 }

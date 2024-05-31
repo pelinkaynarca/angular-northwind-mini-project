@@ -5,6 +5,7 @@ import { CategoryUpdateComponent } from './categories/components/category-update
 import { CategoryListGroupComponent } from './categories/components/category-list-group/category-list-group.component';
 import { ProductUpdateComponent } from './products/components/product-update/product-update.component';
 import { ProductListGroupComponent } from './products/components/product-list-group/product-list-group.component';
+import { canDeactivateForm } from '../guards/can-deactivate.guard';
 
 export const adminRoutes: Routes = [
   {
@@ -23,6 +24,7 @@ export const adminRoutes: Routes = [
           {
             path: 'update/:id',
             component: CategoryUpdateComponent,
+            canDeactivate:[canDeactivateForm]
           },
           {
             path:'',
@@ -36,6 +38,7 @@ export const adminRoutes: Routes = [
           {
             path: 'update/:id',
             component: ProductUpdateComponent,
+            canDeactivate:[canDeactivateForm]
           },
           {
             path:'',
